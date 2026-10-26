@@ -1,68 +1,107 @@
 <!doctype html>
 <html>
+
 <head>
-    <title>21 Savage Fan Site</title>
+    <title>90's RnB Playlist</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-<div class="container">
+    <div class="container">
 
-    <div class="page-header text-center">
-        <h1><span class="fa fa-anchor"></span> Profile Page</h1>
-        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
-    </div>
+        <div class="page-header text-center">
 
-    <div class="row">
+            <h1> 🔊 Welcome to my 90's on Repeat 🔊</h1>
+        </div>
 
-        <!-- LOCAL INFORMATION -->
-        <div class="col-sm-6">
-            <div class="well">
-                <h3><span class="fa fa-user"></span> Local</h3>
+        <div class="row">
 
+
+            <div class="col-sm-6">
+                <h2>Queue It</h2>
                 <% if (user.local.email) { %>
-                    <p>
-                        <strong>id</strong>: <%= user._id %><br>
-                        <strong>email</strong>: <%= user.local.email %><br>
-                        <strong>password</strong>: <%= user.local.password %>
-                    </p>
 
-                    <a href="/unlink/local" class="btn btn-default">Unlink</a>
-                <% } else { %>
-                    <a href="/connect/local" class="btn btn-default">Connect Local</a>
-                <% } %>
+                    <form action="/songs" method="POST">
+                        <label for="title">Song Title:</label>
+                        <input type="text" id="title" name="title" placeholder="song-name" required>
 
+                        <label for="artist">Artist:</label>
+                        <input type="text" id="artist" name="artist" placeholder="artist" required>
+
+                        <label for="year">Year Released:</label>
+                        <input type="number" id="year" name="year" min="1990" max="1999" placeholder="year" required>
+
+                        <button type="submit">Add Song</button>
+                    </form>
+
+
+                    <h3>Silk, Suede & 90s Playlist</h3>
+
+                    <% if (songs.length===0) { %>
+                        <p>Your playlist is empty. Add your first song below!</p>
+                        <% } %>
+
+                            <ul class="songs">
+                                <% for (let i=0; i < songs.length; i++) { %>
+                                    <li class="song">
+                                        <h4>
+                                            <%= songs[i].title %>
+                                        </h4>
+                                        <p>Artist: <%= songs[i].artist %>
+                                        </p>
+                                        <p>Release year: <%= songs[i].year %>
+                                        </p>
+                                        <p>Favorite: <%= songs[i].favorite ? 'Yes' : 'No' %>
+                                        </p>
+                                        <button type="button" class="favorite-button" data-id="<%= songs[i]._id %>"
+                                            data-favorite="<%= songs[i].favorite %>">
+                                            💗 Favorite
+                                        </button>
+
+                                        <button type="button" class="delete-button" data-id="<%= songs[i]._id %>">
+                                            🗑️ Song
+                                        </button>
+                                    </li>
+                                    <% } %>
+                            </ul>
             </div>
+            <% } %>
+
+                <!-- LOCAL INFORMATION -->
+                <div class="col-sm-6">
+                    <div class="well">
+                        <h3>BLACK CULTURE</h3>
+                        <h4>"I only hope that one day, America will recognize what the rest of the world already has
+                            known, that our indigenous music - gospel, blues, jazz and R&B - is the heart and soul of
+                            all popular music; and that we cannot afford to let this legacy slip into obscurity, I'm
+                            telling you." - Quincy Jones
+                        </h4>
+
+                        <% if (user.local.email) { %>
+                            <a href="/unlink/local" class="btn btn-default">Unlink</a>
+                            <% } else { %>
+
+                                <% } %>
+                                    <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+
+                    </div>
+
+                    <div class="profile-gif">
+                        <iframe src="https://giphy.com/embed/TIA6S9wO3RSsJQlACz" title="Aaliyah — 4 Page Letter GIF"
+                            allowfullscreen></iframe>
+
+                        <p>
+                            <a href="https://giphy.com/gifs/blackground-aaliyah-4-page-letter-TIA6S9wO3RSsJQlACz">
+                                via GIPHY
+                            </a>
+                        </p>
+                    </div>
+                </div>
         </div>
-        <div class="col-sm-6">
-          <h3>Messages</h3>
-          <ul class="messages">
-          <% for(let i=0; i<messages.length; i++) {%>
-            <li class="message">
-              <span data-message-id="<%= messages[i]._id %>"><%= messages[i].name %></span>
-              <span><%= messages[i].msg %></span>
-              <span><%= messages[i].thumbUp %></span>
-              <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
-              <span><i class="fa fa-thumbs-down" aria-hidden="true"></i></span>
-              <span><i class="fa fa-trash-o" aria-hidden="true"></i></span>
-            </li>
-          <% } %>
-          </ul>
-
-          <h2>Add a message</h2>
-        <% if (user.local.email) { %>
-          <form action="/messages" method="POST">
-            <input type="text" value="<%= user.local.email %>" name="name">
-            <input type="text" placeholder="message" name="msg">
-            <button type="submit">Submit</button>
-          </form>
-        </div>
-        <% } %>
-
-</div>
-
-<script src="main.js"></script>
-
+    </div>
+    <script src="/main.js"></script>
 </body>
+
 </html>

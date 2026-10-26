@@ -1,70 +1,59 @@
-const thumbUp = document.getElementsByClassName("fa-thumbs-up");
-const thumbDown = document.getElementsByClassName("fa-thumbs-down");
-const trash = document.getElementsByClassName("fa-trash-o");
 
-Array.from(thumbUp).forEach(function (element) {
-  element.addEventListener('click', function () {
-    // const name = this.parentNode.parentNode.childNodes[1].innerText
-    // const msg = this.parentNode.parentNode.childNodes[3].innerText
-    const thumbUp = parseFloat(this.parentNode.parentNode.childNodes[5].innerText)
-    const messageId = this.parentNode.parentNode.childNodes[1].dataset.messageId
-    fetch('/messages', {
-      method: 'put',
+// Find the favorite buttons on the page.
+const favoriteButtons = document.querySelectorAll('.favorite-button'); 
+const deleteButtons = document.querySelectorAll('.delete-button'); 
+
+
+// Listen for a click on each button.
+Array.from(favoriteButtons).forEach(function(button) {
+  button.addEventListener('click', function() {
+    const id = this.dataset.id
+    const favorite = this.dataset.favorite === 'true'
+
+    fetch('/songs', {
+  method: 'PUT',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    id: id,
+    favorite: !favorite
+  })
+})
+  .then(function(response) {
+    if (!response.ok) {
+      throw new Error('Could not update favorite status')
+    }
+
+    window.location.reload()
+  })
+  .catch(function(error) {
+    console.error(error)
+    alert('Could not update favorite status. Please try again.')
+  })
+  })
+})
+
+// Delete the song whose button was clicked. 
+Array.from(deleteButtons).forEach(function(button) {
+  button.addEventListener('click', function() {
+    const id = this.dataset.id
+
+    fetch('/songs', {
+      method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        messageId,
-        'thumbUp': thumbUp
+        id: id
       })
     })
-       .then(response => {
-        if (response.ok) return response.json()
-      })
-      .then(data => {
-        console.log(data)
-        window.location.reload(true)
-      })
-  });
-});
+      .then(function(response) {
+        if (!response.ok) {
+          throw new Error('Could not delete song')
+        }
 
-Array.from(thumbDown).forEach(function (element) {
-  element.addEventListener('click', function () {
-    // const name = this.parentNode.parentNode.childNodes[1].innerText
-    // const msg = this.parentNode.parentNode.childNodes[3].innerText
-    const thumbUp = parseFloat(this.parentNode.parentNode.childNodes[5].innerText)
-    const messageId = this.parentNode.parentNode.childNodes[1].dataset.messageId
-    fetch('/down', {
-      method: 'put',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        messageId,
-        'thumbUp': thumbDown
+        window.location.reload()
       })
-    })
-       .then(response => {
-        if (response.ok) return response.json()
+      .catch(function(error) {
+        console.error(error)
+        alert('Could not delete song. Please try again.')
       })
-      .then(data => {
-        console.log(data)
-        window.location.reload(true)
-      })
-  });
-});
-
-Array.from(trash).forEach(function (element) {
-  element.addEventListener('click', function () {
-    const name = this.parentNode.parentNode.childNodes[1].innerText
-    const msg = this.parentNode.parentNode.childNodes[3].innerText
-    fetch('/messages', {
-      method: 'delete',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        'name': name,
-        'msg': msg
-      })
-    }).then(function (response) {
-      window.location.reload()
-    })
-  });
-});
+  })
+})

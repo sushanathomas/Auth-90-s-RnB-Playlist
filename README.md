@@ -1,67 +1,116 @@
-# Savage Auth
+# Silk, Suede & 90s
+### 90’s on Repeat
 
-A message board application with user authentication. Users can create an account, log in, post messages, and interact with posts.
+A full-stack playlist app for keeping track of favorite 90’s R&B songs and artists.
 
-Built as part of my software engineering coursework at Resilient Coders.
+I built this project to practice CRUD functionality and authentication with Passport. Users can create an account, log in, and manage their own playlist.
+
+## Screenshot
+
+<!-- Add a screenshot of the application here. -->
 
 ## Features
 
-- User signup and login
-- Session-based authentication
-- Post messages
-- Increase or decrease a message’s score
-- Delete messages
-- Store users and messages in MongoDB
+- Sign up, log in, and log out.
+- Add songs with a title, artist, and release year.
+- View a personal playlist.
+- Mark and unmark songs as favorites.
+- Delete songs.
+- Validate song information before saving.
+- Use the app on desktop and smaller screens.
 
-## Tech Stack
+Each account has its own playlist. Users can only view, update, and delete their own songs.
 
-- HTML, CSS, and JavaScript
-- Node.js and Express
-- MongoDB and Mongoose
-- EJS templates
-- Passport.js
-- Express Session
+This app stores song information. It does not stream music.
 
-## What I Worked On
+## CRUD Functionality
 
-- Updated database dependencies to resolve a connection error.
-- Replaced the unsupported MongoDB collection `.save()` method with `.insertOne()` for message creation.
-- Moved database credentials and the session secret into environment variables.
-- Added an environment example file and setup instructions.
+- **Create:** Add a song.
+- **Read:** Display the logged-in user’s songs.
+- **Update:** Change a song’s favorite status.
+- **Delete:** Remove a song.
 
-## Installation
+## Tools Used
 
-1. Clone this repository and open its project folder.
-2. Install dependencies:
+- **HTML and EJS:** Build pages and display saved information.
+- **CSS and Bootstrap:** Style the pages and create responsive layouts.
+- **JavaScript:** Handle button clicks and send requests using fetch.
+- **Node.js:** Run JavaScript on the server.
+- **Express:** Handle routes, requests, and responses.
+- **MongoDB Atlas:** Host the database.
+- **Mongoose:** Define the user model and work with user accounts.
+- **MongoDB Node.js driver:** Work with song documents and ObjectIds.
+- **Passport and passport-local:** Handle email-and-password authentication.
+- **bcrypt-nodejs:** Hash passwords and check them during login.
+- **express-session:** Maintain login sessions.
+- **connect-flash:** Display signup and login messages.
+- **dotenv:** Load private settings from environment variables.
+- **Nodemon:** Restart the development server after code changes.
 
-   npm install
+## How It Works
 
-3. Copy `.env.example` to `.env`:
+When a user signs up, the app hashes their password before saving the account.
 
-   cp .env.example .env
+After login, Passport identifies the user. Each saved song includes that user’s ID. The app uses this ID when loading, updating, and deleting songs to keep playlists separate.
 
-4. Update these values in `.env`:
-
-   MONGODB_URI=your-mongodb-connection-string
-   MONGODB_DB_NAME=your-database-name
-   SESSION_SECRET=your-long-random-secret
-
-   Percent-encode special characters in the database username and password.
-
-5. Keep `.env` private. It is excluded from Git by `.gitignore`.
+The server passes song information to EJS, which displays it on the profile page. Browser JavaScript sends requests when a user changes favorite status or deletes a song.
 
 ## Run Locally
 
-Start the server:
+1. Clone this repository and open the project folder.
 
-    node server.js
+2. Install dependencies:
 
-Open http://localhost:8080 in your browser.
+   ```bash
+   npm install
+   ```
 
-Create an account or log in to access the message board.
+3. Create a `.env` file in the project root:
+
+   ```env
+   MONGODB_URI=your_mongodb_connection_string
+   MONGODB_DB_NAME=RnBPlaylist
+   SESSION_SECRET=your_private_session_secret
+   ```
+
+   Use your own database credentials and a randomly generated session secret. Do not commit the `.env` file.
+
+4. In MongoDB Atlas, allow your current IP address and make sure your database user has access to the database.
+
+5. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+6. Open [http://localhost:8080](http://localhost:8080).
+
+## Main Files
+
+- `server.js`: Configures Express, database connections, sessions, and Passport.
+- `config/database.js`: Loads database settings.
+- `config/passport.js`: Defines signup, login, and session authentication.
+- `app/models/user.js`: Defines user information and password helper methods.
+- `app/routes.js`: Handles authentication pages and song CRUD routes.
+- `views/`: Contains EJS page templates.
+- `public/main.js`: Handles favorite and delete button requests.
+- `public/style.css`: Contains the custom styling and responsive rules.
+
+## What I Learned
+
+- How authentication differs from protecting a user’s individual data.
+- How Passport handles signup, login, and sessions.
+- How password hashing works.
+- How to connect saved entries to a user’s ID.
+- How to build CRUD routes with Express and MongoDB.
+- How to validate submitted information.
+- How to use Flexbox and media queries.
+- How to keep credentials out of source code.
 
 ## Credits
 
-Based on the Savage Auth starter project used in Resilient Coders coursework and adapted from Scotch.io’s authentication tutorial.
+- This project was adapted from the `savage-auth` starter provided through Resilient Coders coursework.
+- The embedded Aaliyah “4 Page Letter” GIF is hosted on [GIPHY](https://giphy.com/).
+- [View the GIF and its source attribution on GIPHY](https://giphy.com/gifs/blackground-aaliyah-4-page-letter-TIA6S9wO3RSsJQlACz).
 
-Updates by [Sushana Thomas](https://github.com/sushanathomas).
+The GIF is embedded for visual presentation. I do not claim ownership of the GIF or the underlying footage.

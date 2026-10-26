@@ -5,8 +5,8 @@
 body {
   margin: 0;
   padding: 40px 16px;
-  background: #121826;
-  color: #edf2f7;
+  background: #281c18;
+  color: #fff5e8;
   font-family: Arial, sans-serif;
   line-height: 1.6;
   overflow-wrap: break-word;
@@ -14,7 +14,7 @@ body {
 
 .container {
   width: 100%;
-  max-width: 960px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -25,128 +25,159 @@ h3 {
 }
 
 a {
-  color: #93c5fd;
+  color: #f1c0cb;
 }
 
+/* Beige panels on the home, login, and profile pages. */
 .jumbotron,
-.well,
-.message {
+.well {
   padding: 24px;
-  background: #ffffff;
-  color: #1e293b;
-  border: 1px solid #d1d5db;
+  background: #ead8c0;
+  color: #30211c;
+  border: 1px solid #cbb394;
   border-radius: 10px;
 }
 
 .jumbotron a,
-.well a,
-.message a {
-  color: #166534;
+.well a {
+  color: #71364a;
+}
+
+/* Stack labels and inputs in the forms. */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 input,
 .form-control {
+  width: 100%;
   max-width: 100%;
   min-height: 44px;
   padding: 10px;
-  background: #ffffff;
-  color: #1e293b;
-  border: 1px solid #64748b;
+  background: #fff8ef;
+  color: #30211c;
+  border: 1px solid #9a7c69;
   border-radius: 6px;
   font: inherit;
 }
 
-form input {
-  margin-bottom: 12px;
-}
-
+/* Pink buttons, including links styled as buttons. */
 button,
 .btn {
   max-width: 100%;
   min-height: 44px;
   padding: 10px 18px;
-  background: #166534;
-  color: #ffffff;
-  border: 1px solid #166534;
+  background: #e7a6b5;
+  color: #30211c;
+  border: 1px solid #e7a6b5;
   border-radius: 6px;
   font: inherit;
   cursor: pointer;
 }
 
-/* Keep button links readable inside white cards. */
+button:hover,
+.btn:hover,
+.btn:focus {
+  background: #f1c0cb;
+  color: #30211c;
+  border-color: #f1c0cb;
+}
+
 .jumbotron a.btn,
-.well a.btn,
-.message a.btn {
-  color: #ffffff;
+.well a.btn {
+  color: #30211c;
 }
 
 a:focus-visible,
 button:focus-visible,
 input:focus-visible {
-  outline: 3px solid #2563eb;
+  outline: 3px solid #f1c0cb;
   outline-offset: 3px;
 }
 
-.messages {
-  padding: 16px;
+/* Arrange songs across the available space. */
+.songs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 0;
+  margin: 24px 0;
   list-style: none;
-  background: #ffffff;
-  color: #1e293b;
-  border: 1px solid #d1d5db;
+}
+
+.song {
+  flex: 1 1 230px;
+  min-width: 0;
+  padding: 20px;
+  background: #ead8c0;
+  color: #30211c;
+  border: 2px solid #fff5e8;
   border-radius: 10px;
 }
 
-.message {
-  margin: 0;
-  padding: 10px 0;
-  background: transparent;
+.song h4 {
+  margin-top: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.song button {
+  margin: 4px 0;
+}
+
+/* Keep the GIF inside the right column. */
+.profile-gif {
+  width: 100%;
+  max-width: 480px;
+  margin: 24px auto 0;
+  text-align: center;
+}
+
+.profile-gif iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 480 / 271;
   border: 0;
-  border-radius: 0;
-}
-
-.message > span {
-  display: inline-block;
-  margin-right: 8px;
-}
-
-.fa-thumbs-up,
-.fa-thumbs-down,
-.fa-trash {
-  padding: 12px;
-  cursor: pointer;
-}
-
-.fa-thumbs-up,
-.fa-thumbs-down {
-  color: #15803d;
-}
-
-.fa-trash {
-  color: #64748b;
 }
 
 img {
   display: block;
   max-width: 100%;
   height: auto;
-  max-height: 200px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   body {
-    padding: 24px 12px;
+    padding: 24px 16px;
   }
 
-  .jumbotron,
-  .well {
-    padding: 18px;
+  .row > .col-sm-6 {
+    float: none;
+    width: 100%;
+    margin-bottom: 24px;
+  }
+}
+
+/* Make controls and song cards fit narrow phones. */
+@media (max-width: 400px) {
+  body {
+    padding: 16px 8px;
   }
 
   h1 {
-    font-size: 2rem;
+    font-size: 1.7rem;
   }
-
-  form input,
+  .jumbotron,
+  .well,
+  .song {
+    padding: 16px;
+  }
+  .song {
+    flex-basis: 100%;
+  }
+  .song button,
   form button {
     width: 100%;
   }
