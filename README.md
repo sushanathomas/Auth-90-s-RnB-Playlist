@@ -7,7 +7,9 @@ I built this project to practice CRUD functionality and authentication with Pass
 
 ## Screenshot
 
-<img width="1095" height="804" alt="90&#39;sRnB" src="https://github.com/user-attachments/assets/5c6a0af0-7c4e-425f-a5f8-998fb84e5a6f" />
+<img width="600" height="600" alt="90&#39;s RnB2" src="https://github.com/user-attachments/assets/92ec6e66-17c0-46a9-9abc-7e6a8a93df76" />
+<img width="600" height="600" alt="90&#39;s RnB" src="https://github.com/user-attachments/assets/419a5161-383d-4d53-bf0a-b95a1a085c14" />
+
 
 ## Features
 
