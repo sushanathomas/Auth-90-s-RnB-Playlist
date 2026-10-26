@@ -1,13 +1,13 @@
 # Silk, Suede & 90s
 ### 90’s on Repeat
 
-A full-stack playlist app for keeping track of favorite 90’s R&B songs and artists.
+A full-stack playlist app for keeping track of favorite 90s R&B songs and artists.
 
 I built this project to practice CRUD functionality and authentication with Passport. Users can create an account, log in, and manage their own playlist.
 
 ## Screenshot
 
-<!-- Add a screenshot of the application here. -->
+<img width="1095" height="804" alt="90&#39;sRnB" src="https://github.com/user-attachments/assets/5c6a0af0-7c4e-425f-a5f8-998fb84e5a6f" />
 
 ## Features
 
